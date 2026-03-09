@@ -109,17 +109,18 @@
 
     /* PIN */
     #pin-section{position:relative;height:100vh;overflow:hidden;background:var(--bg);transition:background .6s;}
-    .bio-entry{position:absolute;inset:0;display:flex;align-items:center;padding:0 8%;opacity:0;visibility:hidden;}
-    #step1,#step2,#step3{display:flex !important;align-items:center !important;justify-content:space-between !important;padding:0 5% !important;}
-    #step1>div:first-child,#step2>div:first-child,#step3>div:first-child{flex:1;max-width:480px;}
-    .img-col{flex:1;height:100vh;position:relative;overflow:hidden;background-size:cover;background-position:center;}
-    .img-col::before{content:'';position:absolute;inset:0;z-index:2;background:linear-gradient(135deg,rgba(232,84,122,.18) 0%,rgba(12,10,14,.55) 100%);}
-    .img-col img{width:100%;height:100%;object-fit:cover;display:block;position:relative;z-index:1;filter:grayscale(15%) contrast(1.05);}
+    #pin-wrap{display:flex;height:100%;width:400vw;}
+    .bio-entry{min-width:100vw;height:100%;position:relative;display:flex;align-items:stretch;overflow:hidden;}
+    .bio-text-col{flex:0 0 45%;display:flex;flex-direction:column;justify-content:center;padding:0 6% 0 7%;position:relative;z-index:2;}
+    .bio-img-col{flex:1;position:relative;overflow:hidden;}
+    .bio-img-col::before{content:'';position:absolute;inset:0;z-index:2;background:linear-gradient(135deg,rgba(232,84,122,.18) 0%,rgba(12,10,14,.55) 100%);}
+    .bio-img-col img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(15%) contrast(1.05);}
     .bio-tag{font-family:"Tenor Sans",sans-serif;font-size:.57rem;letter-spacing:.62em;text-transform:uppercase;color:var(--rose);display:block;margin-bottom:1.8rem;transition:color .6s;}
     .bio-big{font-family:"Playfair Display",serif;font-size:clamp(3.2rem,8.5vw,7.5rem);font-weight:400;line-height:.95;color:var(--heading-col);letter-spacing:-.02em;transition:color .6s;}
     .bio-big em{font-style:italic;color:var(--italic-col);transition:color .6s;}
     .bio-caption{font-family:"Tenor Sans",sans-serif;font-size:.58rem;letter-spacing:.45em;text-transform:uppercase;color:var(--text-faint);margin-top:1.8rem;display:block;transition:color .6s;}
-    .flip-cards-container{position:absolute;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;gap:2rem;opacity:0;visibility:hidden;perspective:1000px;}
+    .flip-panel{min-width:100vw;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;}
+    .flip-cards-container{position:relative;inset:auto;display:flex;align-items:center;justify-content:center;gap:2rem;opacity:1;visibility:visible;perspective:1000px;}
     .flip-card{width:200px;height:260px;cursor:pointer;position:relative;transform-style:preserve-3d;transition:transform .7s cubic-bezier(0.23,1,0.32,1);}
     .flip-card.flipped{transform:rotateY(180deg);}
     .flip-card-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;}
@@ -226,14 +227,14 @@
     /* PROJECTS */
     #works{background:var(--bg2);padding:14vh 0;transition:background .6s;}
     .proj-hd{padding:0 7% 5rem;}
-    .projects-wrapper{display:flex;align-items:center;gap:1.2rem;padding:0 3.5%;margin-bottom:4rem;}
-    .projects-scroll-container{overflow-x:auto;overflow-y:hidden;scrollbar-width:none;flex:1;padding:.8rem 0;max-width:100%;}
+    .work-row-wrap{display:flex;align-items:center;gap:1.2rem;padding:0 3%;margin-bottom:2.5rem;}
+    .projects-scroll-container{overflow-x:auto;overflow-y:hidden;scrollbar-width:none;flex:1;padding:1rem 0;-webkit-mask:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);}
     .projects-scroll-container::-webkit-scrollbar{display:none;}
-    .project-row{display:flex;gap:1.2rem;width:max-content;padding-left:8rem;padding-right:2rem;}
-    #row2{padding-left:0;margin-left:-2rem;}
-    .scroll-btn{width:42px;height:42px;border:1px solid var(--border);background:transparent;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:none;color:var(--text-muted);transition:all .3s;flex-shrink:0;}
-    .scroll-btn:hover{border-color:var(--rose);color:var(--rose);transform:scale(1.08);}
-    .scroll-btn svg{width:14px;height:14px;}
+    .project-row{display:flex;gap:1.2rem;width:max-content;}
+    .work-btn{width:44px;height:44px;border:1px solid var(--border);background:transparent;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:none;color:var(--text-muted);transition:all .3s;flex-shrink:0;}
+    .work-btn:hover{border-color:var(--rose);color:var(--rose);transform:scale(1.08);}
+    .work-btn svg{width:14px;height:14px;}
+    [data-theme="light"] .work-btn{border-color:rgba(140,60,90,0.35);color:var(--text-muted);}
     .project-card{width:285px;height:195px;background:var(--bg3);position:relative;overflow:hidden;cursor:none;border:1px solid var(--border);text-decoration:none;display:block;flex-shrink:0;transition:border-color .35s,transform .4s cubic-bezier(0.23,1,0.32,1),box-shadow .4s;}
     .project-card:hover{transform:scale(.97) translateY(-3px);border-color:var(--rose);box-shadow:0 20px 40px var(--accent-glow),0 0 40px rgba(232,84,122,0.12);}
     .project-card img{width:100%;height:100%;object-fit:cover;opacity:.28;transition:opacity .45s,transform .65s;}
@@ -464,6 +465,21 @@
     .mobile-nav-link:hover{color:var(--rose);}
     .mob-link-num{font-family:"Tenor Sans",sans-serif;font-size:.55rem;letter-spacing:.3em;color:var(--rose);opacity:.6;}
     /* MEDIA QUERIES */
+    @media(max-width:1024px){
+      #h-section{height:auto!important;overflow:visible!important;}
+      #h-wrap{display:flex!important;flex-direction:column!important;width:100%!important;max-width:100vw!important;}
+      .h-panel{min-width:100%!important;width:100%!important;height:auto!important;padding:10vh 7%!important;min-height:unset!important;}
+      #pin-section{height:auto!important;overflow:visible!important;}
+      #pin-wrap{display:block!important;width:100%!important;}
+      .bio-entry{min-width:100%!important;height:auto!important;flex-direction:column!important;position:relative!important;overflow:hidden!important;}
+      .bio-img-col{position:relative!important;inset:auto!important;width:100%!important;height:52vw!important;max-height:260px!important;flex:none!important;}
+      .bio-text-col{position:relative!important;bottom:auto!important;left:auto!important;right:auto!important;flex:none!important;padding:1.6rem 7% 2.2rem!important;background:none!important;z-index:1!important;}
+      .bio-big{font-size:clamp(2rem,8vw,3rem)!important;}
+      .flip-panel{min-width:100%!important;height:auto!important;padding:5vh 5%!important;}
+      .flip-cards-container{flex-wrap:wrap;touch-action:pan-y;gap:1.2rem!important;}
+      .flip-card{touch-action:pan-y;width:160px!important;height:210px!important;}
+      .work-btn{display:none;}
+    }
     @media(max-width:768px){
       html,body{overflow-x:hidden;max-width:100vw;}
       .nav-links,.nav-cta{display:none;}
@@ -489,10 +505,6 @@
       #h-wrap{flex-direction:column;width:100%;}
       .h-panel{min-width:100%;height:auto;padding:10vh 7%;min-height:unset;}
       #pin-section{height:auto!important;overflow:visible;}
-      .bio-entry{position:relative!important;inset:auto!important;opacity:1!important;visibility:visible!important;transform:none!important;height:65vw;overflow:hidden;}
-      #step1,#step2,#step3{display:flex!important;flex-direction:column!important;align-items:stretch!important;justify-content:flex-start!important;padding:0!important;position:relative!important;}
-      #step1>div:first-child,#step2>div:first-child,#step3>div:first-child{position:absolute;bottom:0;left:0;right:0;z-index:3;padding:1.5rem 7%;max-width:100%;background:linear-gradient(to top,var(--bg) 55%,transparent);}
-      .img-col{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;flex:none!important;}
       .flip-cards-container{position:relative!important;inset:auto!important;opacity:1!important;visibility:visible!important;height:auto!important;padding:5vh 5%;transform:none!important;flex-wrap:wrap;perspective:1000px;touch-action:pan-y;}
       .flip-card{touch-action:pan-y;}
       .bio-big{font-size:clamp(2.2rem,8vw,3.5rem);}
@@ -619,15 +631,28 @@
     </div>
   </section>
   <section id="pin-section">
-    <div class="flip-cards-container" id="flipCardsContainer">
-      <div class="flip-card" id="flipCard1"><div class="flip-card-inner"><div class="flip-card-front"><div class="fc-front-inner"><div class="fc-logo">Gh</div><div class="fc-plat-name">GitHub</div><div class="fc-tap-hint">tap to find me</div></div></div><div class="flip-card-back"><div class="fc-back-inner"><div class="fc-back-tagline">Find me on</div><div class="fc-back-name">GitHub</div><div class="fc-back-handle">@yourusername</div><a href="https://github.com" target="_blank" class="fc-visit-btn">Open Profile</a></div></div></div></div>
-      <div class="flip-card" id="flipCard2"><div class="flip-card-inner"><div class="flip-card-front"><div class="fc-front-inner"><div class="fc-logo">in</div><div class="fc-plat-name">LinkedIn</div><div class="fc-tap-hint">tap to find me</div></div></div><div class="flip-card-back"><div class="fc-back-inner"><div class="fc-back-tagline">Find me on</div><div class="fc-back-name">LinkedIn</div><div class="fc-back-handle">linkedin.com/in/abdullah</div><a href="https://linkedin.com" target="_blank" class="fc-visit-btn">View Profile</a></div></div></div></div>
-      <div class="flip-card" id="flipCard3"><div class="flip-card-inner"><div class="flip-card-front"><div class="fc-front-inner"><div class="fc-logo">𝕏</div><div class="fc-plat-name">Twitter / X</div><div class="fc-tap-hint">tap to find me</div></div></div><div class="flip-card-back"><div class="fc-back-inner"><div class="fc-back-tagline">Find me on</div><div class="fc-back-name">Twitter / X</div><div class="fc-back-handle">@yourusername</div><a href="https://twitter.com" target="_blank" class="fc-visit-btn">Open Profile</a></div></div></div></div>
-      <span class="flip-cards-label">Choose your platform wisely.</span>
+    <div id="pin-wrap">
+      <div class="bio-entry" id="step1">
+        <div class="bio-text-col"><span class="bio-tag">Origins</span><h2 class="bio-big">Born<br/>in <em>Kolkata</em></h2><span class="bio-caption">The City of Joy &middot; West Bengal</span></div>
+        <div class="bio-img-col"><img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1200&fit=crop" alt="Kolkata"/></div>
+      </div>
+      <div class="bio-entry" id="step2">
+        <div class="bio-text-col"><span class="bio-tag">Roots</span><h2 class="bio-big">Grew up in<br/><em>Allahabad</em></h2><span class="bio-caption">Where Life Spread Roots &middot; UP</span></div>
+        <div class="bio-img-col"><img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=1200&fit=crop" alt="Allahabad"/></div>
+      </div>
+      <div class="bio-entry" id="step3">
+        <div class="bio-text-col"><span class="bio-tag">School</span><h2 class="bio-big">Studied at<br/><em>MLS</em></h2><span class="bio-caption" style="color:var(--rose);opacity:1;">The Academic Arc Begins</span></div>
+        <div class="bio-img-col"><img src="https://images.unsplash.com/photo-1427504494785-cdbed4689f05?q=80&w=1200&fit=crop" alt="MLS"/></div>
+      </div>
+      <div class="flip-panel">
+        <div class="flip-cards-container" id="flipCardsContainer">
+          <div class="flip-card" id="flipCard1"><div class="flip-card-inner"><div class="flip-card-front"><div class="fc-front-inner"><div class="fc-logo">Gh</div><div class="fc-plat-name">GitHub</div><div class="fc-tap-hint">tap to find me</div></div></div><div class="flip-card-back"><div class="fc-back-inner"><div class="fc-back-tagline">Find me on</div><div class="fc-back-name">GitHub</div><div class="fc-back-handle">@yourusername</div><a href="https://github.com" target="_blank" class="fc-visit-btn">Open Profile</a></div></div></div></div>
+          <div class="flip-card" id="flipCard2"><div class="flip-card-inner"><div class="flip-card-front"><div class="fc-front-inner"><div class="fc-logo">in</div><div class="fc-plat-name">LinkedIn</div><div class="fc-tap-hint">tap to find me</div></div></div><div class="flip-card-back"><div class="fc-back-inner"><div class="fc-back-tagline">Find me on</div><div class="fc-back-name">LinkedIn</div><div class="fc-back-handle">linkedin.com/in/abdullah</div><a href="https://linkedin.com" target="_blank" class="fc-visit-btn">View Profile</a></div></div></div></div>
+          <div class="flip-card" id="flipCard3"><div class="flip-card-inner"><div class="flip-card-front"><div class="fc-front-inner"><div class="fc-logo">𝕏</div><div class="fc-plat-name">Twitter / X</div><div class="fc-tap-hint">tap to find me</div></div></div><div class="flip-card-back"><div class="fc-back-inner"><div class="fc-back-tagline">Find me on</div><div class="fc-back-name">Twitter / X</div><div class="fc-back-handle">@yourusername</div><a href="https://twitter.com" target="_blank" class="fc-visit-btn">Open Profile</a></div></div></div></div>
+        </div>
+        <span class="flip-cards-label">Choose your platform wisely.</span>
+      </div>
     </div>
-    <div class="bio-entry" id="step1"><div><span class="bio-tag">Origins</span><h2 class="bio-big">Born<br/>in <em>Kolkata</em></h2><span class="bio-caption">The City of Joy &middot; West Bengal</span></div><div class="img-col" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1200&fit=crop')"><img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=800&fit=crop" alt="Kolkata"/></div></div>
-    <div class="bio-entry" id="step2"><div><span class="bio-tag">Roots</span><h2 class="bio-big">Grew up in<br/><em>Allahabad</em></h2><span class="bio-caption">Where Life Spread Roots &middot; UP</span></div><div class="img-col" style="background-image:url('https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=1200&fit=crop')"><img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=800&fit=crop" alt="Allahabad"/></div></div>
-    <div class="bio-entry" id="step3"><div><span class="bio-tag">School</span><h2 class="bio-big">Studied at<br/><em>MLS</em></h2><span class="bio-caption" style="color:var(--rose);opacity:1;">The Academic Arc Begins</span></div><div class="img-col" style="background-image:url('https://images.unsplash.com/photo-1427504494785-cdbed4689f05?q=80&w=1200&fit=crop')"><img src="https://images.unsplash.com/photo-1427504494785-cdbed4689f05?q=80&w=800&fit=crop" alt="MLS"/></div></div>
   </section>
   <section id="h-section">
     <canvas id="univ-canvas"></canvas>
@@ -747,8 +772,8 @@
   </section>
   <section id="works">
     <div class="proj-hd reveal"><span class="sec-eye">Portfolio</span><h2 class="sec-title">Selected <em>Works.</em></h2></div>
-    <div class="projects-wrapper">
-      <button class="scroll-btn scroll-btn-left" data-target="row1" aria-label="Scroll left"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg></button>
+    <div class="work-row-wrap">
+      <button class="work-btn" data-row="row1" data-dir="-1" aria-label="Scroll left"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg></button>
       <div class="projects-scroll-container" id="row1-container"><div class="project-row" id="row1">
         <a href="#" class="project-card"><img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800" alt=""/><div class="proj-n">01</div><div class="proj-arr"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div><div class="proj-info"><span class="proj-cat">Web App</span><span class="proj-name">Project One</span></div></a>
         <a href="#" class="project-card"><img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=800" alt=""/><div class="proj-n">02</div><div class="proj-arr"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div><div class="proj-info"><span class="proj-cat">UI Design</span><span class="proj-name">Project Two</span></div></a>
@@ -757,10 +782,10 @@
         <a href="#" class="project-card"><img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?q=80&w=800" alt=""/><div class="proj-n">05</div><div class="proj-arr"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div><div class="proj-info"><span class="proj-cat">Open Source</span><span class="proj-name">Project Five</span></div></a>
         <a href="#" class="project-card"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800" alt=""/><div class="proj-n">06</div><div class="proj-arr"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div><div class="proj-info"><span class="proj-cat">Data Science</span><span class="proj-name">Project Six</span></div></a>
       </div></div>
-      <button class="scroll-btn scroll-btn-right" data-target="row1" aria-label="Scroll right"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+      <button class="work-btn" data-row="row1" data-dir="1" aria-label="Scroll right"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
     </div>
-    <div class="projects-wrapper">
-      <button class="scroll-btn scroll-btn-left" data-target="row2" aria-label="Scroll left"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg></button>
+    <div class="work-row-wrap">
+      <button class="work-btn" data-row="row2" data-dir="-1" aria-label="Scroll left"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg></button>
       <div class="projects-scroll-container" id="row2-container"><div class="project-row" id="row2">
         <a href="#" class="project-card"><img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=800" alt=""/><div class="proj-n">07</div><div class="proj-arr"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div><div class="proj-info"><span class="proj-cat">Mobile</span><span class="proj-name">Project Seven</span></div></a>
         <a href="#" class="project-card"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800" alt=""/><div class="proj-n">08</div><div class="proj-arr"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div><div class="proj-info"><span class="proj-cat">Backend</span><span class="proj-name">Project Eight</span></div></a>
@@ -769,7 +794,7 @@
         <a href="#" class="project-card"><img src="https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?q=80&w=800" alt=""/><div class="proj-n">11</div><div class="proj-arr"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div><div class="proj-info"><span class="proj-cat">Scripting</span><span class="proj-name">Project Eleven</span></div></a>
         <a href="#" class="project-card"><img src="https://images.unsplash.com/photo-1537432376769-00f5c2f4c8d2?q=80&w=800" alt=""/><div class="proj-n">12</div><div class="proj-arr"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div><div class="proj-info"><span class="proj-cat">Systems</span><span class="proj-name">Project Twelve</span></div></a>
       </div></div>
-      <button class="scroll-btn scroll-btn-right" data-target="row2" aria-label="Scroll right"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+      <button class="work-btn" data-row="row2" data-dir="1" aria-label="Scroll right"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
     </div>
   </section>
   <section id="about">
@@ -944,9 +969,8 @@
     (function(){var canvas=document.getElementById('hero-canvas');var renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setClearColor(0x000000,0);var scene=new THREE.Scene();var camera=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,0.1,100);camera.position.z=5;function rsz(){renderer.setSize(innerWidth,innerHeight);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();}rsz();window.addEventListener('resize',rsz);var N=120,geo=new THREE.BufferGeometry(),pos=new Float32Array(N*3),vel=[];for(var i=0;i<N;i++){pos[i*3]=(Math.random()-.5)*14;pos[i*3+1]=(Math.random()-.5)*14;pos[i*3+2]=(Math.random()-.5)*8;vel.push({x:(Math.random()-.5)*.006,y:(Math.random()-.5)*.006,z:(Math.random()-.5)*.003});}geo.setAttribute('position',new THREE.BufferAttribute(pos,3));var colors=new Float32Array(N*3);for(var i=0;i<N;i++){var isGold=Math.random()>.65;if(isGold){colors[i*3]=0.83;colors[i*3+1]=0.66;colors[i*3+2]=0.33;}else{colors[i*3]=0.91;colors[i*3+1]=0.33;colors[i*3+2]=0.48;}}geo.setAttribute('color',new THREE.BufferAttribute(colors,3));var mat=new THREE.PointsMaterial({size:.055,transparent:true,opacity:.55,vertexColors:true});var pts=new THREE.Points(geo,mat);scene.add(pts);var lineMat=new THREE.LineBasicMaterial({color:0xe8547a,transparent:true,opacity:.06});var lineObj=null;function buildLines(){if(lineObj){scene.remove(lineObj);lineObj.geometry.dispose();}var lGeo=new THREE.BufferGeometry(),lPos=[],pa=geo.attributes.position.array;for(var i=0;i<N;i++)for(var j=i+1;j<N;j++){var dx=pa[i*3]-pa[j*3],dy=pa[i*3+1]-pa[j*3+1];if(Math.sqrt(dx*dx+dy*dy)<2.8)lPos.push(pa[i*3],pa[i*3+1],pa[i*3+2],pa[j*3],pa[j*3+1],pa[j*3+2]);}lGeo.setAttribute('position',new THREE.BufferAttribute(new Float32Array(lPos),3));lineObj=new THREE.LineSegments(lGeo,lineMat);scene.add(lineObj);}buildLines();var frame=0;function animate(){requestAnimationFrame(animate);frame++;var pa=geo.attributes.position.array;for(var i=0;i<N;i++){pa[i*3]+=vel[i].x;pa[i*3+1]+=vel[i].y;pa[i*3+2]+=vel[i].z;if(Math.abs(pa[i*3])>7)vel[i].x*=-1;if(Math.abs(pa[i*3+1])>7)vel[i].y*=-1;if(Math.abs(pa[i*3+2])>4)vel[i].z*=-1;}geo.attributes.position.needsUpdate=true;if(frame%3===0)buildLines();pts.rotation.y+=.0005;pts.rotation.x+=.0002;renderer.render(scene,camera);}animate();})();
     /* GSAP */
     gsap.registerPlugin(ScrollTrigger);
-    var steps=[{el:'#step1',from:-0.1,to:.25},{el:'#step2',from:.25,to:.5},{el:'#step3',from:.5,to:.75},{el:'#flipCardsContainer',from:.75,to:1.1}];
-    if(!window.matchMedia('(max-width:768px)').matches){ScrollTrigger.create({trigger:'#pin-section',start:'top top',end:'220% top',pin:true,scrub:0.8,onUpdate:function(self){var p=self.progress;function easio(t){return t<.5?2*t*t:-1+(4-2*t)*t;}steps.forEach(function(s){var el=document.querySelector(s.el),span=s.to-s.from,fade=span*.22,local=p-s.from,op=0,ty=0;if(p>=s.from&&p<=s.to){if(local<fade){op=easio(local/fade);ty=(1-op)*30;}else if(local>span-fade){op=easio((span-local)/fade);ty=(op-1)*-20;}else{op=1;ty=0;}}el.style.opacity=op;el.style.visibility=op>.01?'visible':'hidden';el.style.transform='translateY('+ty+'px)';});}});}
-    (function(){var wrap=document.getElementById('h-wrap'),dot=document.getElementById('final-dot');if(window.matchMedia('(max-width:768px)').matches){document.querySelectorAll('.h-panel').forEach(function(panel){panel.style.opacity='0';panel.style.transform='translateY(40px)';panel.style.filter='blur(4px)';panel.style.transition='opacity 1s cubic-bezier(0.25,0.46,0.45,0.94),transform 1s cubic-bezier(0.25,0.46,0.45,0.94),filter 1s cubic-bezier(0.25,0.46,0.45,0.94)';new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';e.target.style.filter='blur(0)';}});},{threshold:0.2}).observe(panel);});return;}gsap.to(wrap,{x:function(){return-(wrap.offsetWidth-window.innerWidth);},ease:'none',scrollTrigger:{trigger:'#h-section',start:'top top',end:'+='+(wrap.offsetWidth-window.innerWidth),pin:true,scrub:1.5,onUpdate:function(self){if(self.progress>.95)gsap.to(dot,{opacity:1,duration:.4});}}});})();
+    if(!window.matchMedia('(max-width:1024px)').matches){var pinWrap=document.getElementById('pin-wrap');if(pinWrap){gsap.to(pinWrap,{x:function(){return-(pinWrap.offsetWidth-window.innerWidth);},ease:'none',scrollTrigger:{trigger:'#pin-section',start:'top top',end:function(){return'+='+(pinWrap.offsetWidth-window.innerWidth);},pin:true,anticipatePin:1,scrub:1,invalidateOnRefresh:true}});}}
+    (function(){var wrap=document.getElementById('h-wrap'),dot=document.getElementById('final-dot');if(window.matchMedia('(max-width:1024px)').matches){document.querySelectorAll('.h-panel').forEach(function(panel){panel.style.opacity='0';panel.style.transform='translateY(40px)';panel.style.filter='blur(4px)';panel.style.transition='opacity 1s cubic-bezier(0.25,0.46,0.45,0.94),transform 1s cubic-bezier(0.25,0.46,0.45,0.94),filter 1s cubic-bezier(0.25,0.46,0.45,0.94)';new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';e.target.style.filter='blur(0)';}});},{threshold:0.2}).observe(panel);});return;}gsap.to(wrap,{x:function(){return-(wrap.offsetWidth-window.innerWidth);},ease:'none',scrollTrigger:{trigger:'#h-section',start:'top top',end:function(){return'+='+(wrap.offsetWidth-window.innerWidth);},pin:true,anticipatePin:1,scrub:1,invalidateOnRefresh:true,onUpdate:function(self){if(self.progress>.95)gsap.to(dot,{opacity:1,duration:.4});}}});})();
     /* SCROLLTRIGGER REFRESH — fixes content disappearing after images load */
     window.addEventListener('load',function(){ScrollTrigger.refresh();setTimeout(function(){ScrollTrigger.refresh();},300);});
     /* UNIV CANVAS */
@@ -955,13 +979,37 @@
     document.querySelectorAll('.reveal').forEach(function(r){new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in');});},{threshold:0.12,rootMargin:'0px 0px -40px 0px'}).observe(r);});
     /* FLIP */
     document.querySelectorAll('.flip-card').forEach(function(c){c.addEventListener('click',function(e){if(e.target.closest('.fc-visit-btn'))return;c.classList.toggle('flipped');});});
-    /* CAROUSEL */
-    var scrollDistance=300;
-    function smoothScroll(el,target,dur){var start=el.scrollLeft,dist=target-start,startTime=null;function step(t){if(!startTime)startTime=t;var p=Math.min((t-startTime)/(dur*1000),1),e=p<.5?2*p*p:-1+(4-2*p)*p;el.scrollLeft=start+dist*e;if(p<1)requestAnimationFrame(step);}requestAnimationFrame(step);}
-    function handleInfiniteScroll(container){var orig=container._origWidth;if(!orig)return;if(container.scrollLeft<=0)container.scrollLeft=orig;else if(container.scrollLeft>=orig*2)container.scrollLeft=orig;}
-    document.querySelectorAll('.scroll-btn').forEach(function(btn){btn.addEventListener('click',function(){var id=btn.dataset.target,container=document.getElementById(id+'-container'),dir=btn.classList.contains('scroll-btn-left')?-1:1,step=container._itemWidth||scrollDistance;smoothScroll(container,container.scrollLeft+dir*step,.5);});});
-    function setupCarousel(id){var container=document.getElementById(id+'-container'),row=document.getElementById(id);if(!container||!row)return;var orig=row.innerHTML;row.innerHTML=orig+orig+orig;requestAnimationFrame(function(){var origWidth=container.scrollWidth/3,style=getComputedStyle(row),gap=parseFloat(style.gap||style.columnGap||24)||24,first=row.children[0],itemW=first?first.getBoundingClientRect().width+gap:220;container._origWidth=origWidth;container._itemWidth=Math.round(itemW);container.scrollLeft=origWidth;container.addEventListener('scroll',function(){handleInfiniteScroll(container);});});}
-    ['row1','row2'].forEach(setupCarousel);
+    /* WORKS */
+    (function(){
+      var c1=document.getElementById('row1-container'),c2=document.getElementById('row2-container');
+      var r1=document.getElementById('row1'),r2=document.getElementById('row2');
+      if(!c1||!c2||!r1||!r2)return;
+      var STEP=310;
+      function smoothTo(el,target,ms){target=Math.max(0,Math.min(el.scrollWidth-el.clientWidth,target));var s=el.scrollLeft,d=target-s,t0=null;function fr(t){if(!t0)t0=t;var p=Math.min((t-t0)/ms,1),e=p<.5?2*p*p:-1+(4-2*p)*p;el.scrollLeft=s+d*e;if(p<1)requestAnimationFrame(fr);}requestAnimationFrame(fr);}
+      function advance(dir){smoothTo(c1,c1.scrollLeft+dir*STEP,480);smoothTo(c2,c2.scrollLeft-dir*STEP,480);}
+      /* Buttons — both rows coordinated */
+      document.querySelectorAll('.work-btn').forEach(function(btn){btn.addEventListener('click',function(){advance(parseInt(btn.dataset.dir)||1);});});
+      if(window.matchMedia('(max-width:1024px)').matches){
+        /* Mobile: auto-marquee */
+        function marquee(row,container,dir){row.innerHTML+=row.innerHTML;var paused=false,spd=0.55;container.addEventListener('mouseenter',function(){paused=true;});container.addEventListener('mouseleave',function(){paused=false;});container.addEventListener('touchstart',function(){paused=true;},{passive:true});container.addEventListener('touchend',function(){setTimeout(function(){paused=false;},1800);},{passive:true});requestAnimationFrame(function(){var half=row.scrollWidth/2;if(dir<0)container.scrollLeft=half;function step(){if(!paused){container.scrollLeft+=dir*spd;if(dir>0&&container.scrollLeft>=half)container.scrollLeft-=half;if(dir<0&&container.scrollLeft<=0)container.scrollLeft+=half;}requestAnimationFrame(step);}requestAnimationFrame(step);});}
+        marquee(r1,c1,1);marquee(r2,c2,-1);return;
+      }
+      /* Desktop: init row2 at far-right so it flows leftward on scroll-down */
+      requestAnimationFrame(function(){c2.scrollLeft=c2.scrollWidth-c2.clientWidth;});
+      /* Wheel on section → drive both rows in opposite directions */
+      var section=document.getElementById('works'),lastWt=0;
+      section.addEventListener('wheel',function(e){
+        var max1=c1.scrollWidth-c1.clientWidth,max2=c2.scrollWidth-c2.clientWidth;
+        var dir=e.deltaY>0?1:-1;
+        var r1can=dir>0?c1.scrollLeft<max1-4:c1.scrollLeft>4;
+        var r2can=dir>0?c2.scrollLeft>4:c2.scrollLeft<max2-4;
+        if(r1can||r2can){
+          e.preventDefault();
+          var now=performance.now();if(now-lastWt<70)return;lastWt=now;
+          advance(dir);
+        }
+      },{passive:false});
+    })();
     /* MODAL */
     var modal=document.getElementById('projectModal');
     var projData={'01':{title:'Project One',category:'Web App',description:'A cutting-edge web application built with React and Node.js, delivering exceptional performance with a beautiful, intuitive interface.',profit:'$120K+',url:'https://example.com'},'02':{title:'Project Two',category:'UI Design',description:'A comprehensive design system and UI library. Created 200+ components and patterns for cohesive visual language.',profit:'$95K+',url:'https://example.com'},'03':{title:'Project Three',category:'Software',description:'Enterprise-grade software serving 500+ organizations with millions of transactions per day at 99.99% uptime.',profit:'$250K+',url:'https://example.com'},'04':{title:'Project Four',category:'Full Stack',description:'Complete full-stack SaaS with real-time collaboration features and advanced analytics dashboard.',profit:'$180K+',url:'https://example.com'},'05':{title:'Project Five',category:'Open Source',description:'Open-source library with 5K+ GitHub stars, 99% test coverage, and 50K+ weekly npm downloads.',profit:'Community Impact',url:'https://github.com'},'06':{title:'Project Six',category:'Data Science',description:'ML models for predictive analytics achieving 94% accuracy, reducing data processing time by 70%.',profit:'$160K+',url:'https://example.com'},'07':{title:'Project Seven',category:'Mobile',description:'Cross-platform mobile app serving 100K+ active users with offline-first architecture.',profit:'$140K+',url:'https://example.com'},'08':{title:'Project Eight',category:'Backend',description:'Microservices architecture deployed across multiple regions with auto-scaling.',profit:'$200K+',url:'https://example.com'},'09':{title:'Project Nine',category:'Research',description:'Advanced research prototype with findings published in peer-reviewed journals.',profit:'$120K+',url:'https://example.com'},'10':{title:'Project Ten',category:'AI / ML',description:'AI-powered recommendation engine processing 1M+ requests daily, increasing engagement by 65%.',profit:'$300K+',url:'https://example.com'},'11':{title:'Project Eleven',category:'Scripting',description:'Automation framework reducing manual tasks by 90% with 100+ deployment scripts.',profit:'$85K+',url:'https://example.com'},'12':{title:'Project Twelve',category:'Systems',description:'Low-level systems programming achieving 400% improvement in execution speed.',profit:'$210K+',url:'https://example.com'}};
@@ -973,8 +1021,6 @@
     document.addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.classList.contains('active'))closeModal();});
     /* FORM */
     document.getElementById('sendBtn').addEventListener('click',function(){var n=document.getElementById('fn').value.trim(),e=document.getElementById('fe').value.trim(),m=document.getElementById('fm').value.trim(),status=document.getElementById('fStatus');if(!n||!e||!m){status.textContent='Please fill all required fields.';status.style.opacity='1';return;}status.textContent='Sending…';status.style.opacity='1';setTimeout(function(){document.getElementById('fForm').style.display='none';var suc=document.getElementById('fSuccess');suc.style.display='block';requestAnimationFrame(function(){requestAnimationFrame(function(){suc.classList.add('visible');});});},1200);});
-    /* WHEEL CAROUSEL */
-    (function(){var carousels=['row1-container','row2-container'].map(function(id){return document.getElementById(id);}).filter(Boolean);if(!carousels.length)return;var visible=new Map(),lastTime={},MIN=80;var io=new IntersectionObserver(function(entries){entries.forEach(function(en){visible.set(en.target.id,en.isIntersecting);});},{threshold:.25});carousels.forEach(function(c){io.observe(c);});function advance(deltaY){var dir=deltaY>0?1:-1,now=performance.now();carousels.forEach(function(container,idx){if(!visible.get(container.id))return;var prev=lastTime[container.id]||0;if(now-prev<MIN)return;lastTime[container.id]=now;var step=container._itemWidth||scrollDistance;smoothScroll(container,container.scrollLeft+(idx===0?dir:-dir)*step,.5);});}document.addEventListener('wheel',function(e){if(Math.abs(e.deltaY)<Math.abs(e.deltaX))return;advance(e.deltaY);},{passive:true});var lastTouchY=null;document.addEventListener('touchstart',function(e){lastTouchY=e.touches&&e.touches[0]?e.touches[0].clientY:null;},{passive:true});document.addEventListener('touchmove',function(e){if(lastTouchY==null)return;var ty=e.touches&&e.touches[0]?e.touches[0].clientY:null;if(ty==null)return;var delta=lastTouchY-ty;if(Math.abs(delta)>8){advance(delta);lastTouchY=ty;}},{passive:true});})();
 
     /* ==================== 3D TILT — SKILL CARDS ==================== */
     (function(){
