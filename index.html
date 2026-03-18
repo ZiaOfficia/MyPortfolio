@@ -63,9 +63,13 @@
 
     /* THEME TOGGLE */
     #theme-toggle{position:relative;z-index:5000;width:54px;height:28px;background:var(--bg3);border:1px solid var(--border);border-radius:999px;cursor:none;transition:var(--tt);display:flex;align-items:center;padding:3px;flex-shrink:0;margin-left:1.5rem;}
-    .toggle-thumb{width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--gold));transition:transform .45s cubic-bezier(0.34,1.56,0.64,1);display:flex;align-items:center;justify-content:center;font-size:11px;}
+    .toggle-thumb{width:22px;height:22px;border-radius:50%;background:transparent;transition:transform .45s cubic-bezier(0.34,1.56,0.64,1);display:flex;align-items:center;justify-content:center;position:relative;}
     [data-theme="dark"] .toggle-thumb{transform:translateX(0);}
-    [data-theme="light"] .toggle-thumb{transform:translateX(26px);}
+    [data-theme="light"] .toggle-thumb{transform:translateX(24px);}
+    .sun-icon{width:18px;height:18px;transition:filter .5s,opacity .5s;}
+    [data-theme="dark"] .sun-icon{filter:drop-shadow(0 0 5px #ffd700) drop-shadow(0 0 10px #ffaa00) drop-shadow(0 0 18px #ff8800);opacity:1;animation:sun-pulse 2s ease-in-out infinite;}
+    [data-theme="light"] .sun-icon{filter:drop-shadow(0 0 2px #ffcc00) drop-shadow(0 0 4px #ffaa00);opacity:0.55;animation:none;}
+    @keyframes sun-pulse{0%,100%{filter:drop-shadow(0 0 4px #ffd700) drop-shadow(0 0 9px #ffaa00) drop-shadow(0 0 16px #ff8800);}50%{filter:drop-shadow(0 0 8px #ffe44d) drop-shadow(0 0 18px #ffcc00) drop-shadow(0 0 30px #ffaa00);}}
 
     /* NAV */
     nav{position:fixed;top:0;width:100%;z-index:500;padding:1.8rem 5%;display:flex;justify-content:space-between;align-items:center;transition:background .5s,padding .4s,border-color .5s;}
@@ -593,7 +597,7 @@
     </ul>
     <a href="#contact" class="nav-cta">Hire Me</a>
     <div id="theme-toggle" title="Toggle light / dark">
-      <div class="toggle-thumb">&#9788;</div>
+      <div class="toggle-thumb"><svg class="sun-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="4.5" fill="#FFD700" stroke="#FFA500" stroke-width="0.5"/><line x1="12" y1="2" x2="12" y2="5" stroke="#FFD700" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="19" x2="12" y2="22" stroke="#FFD700" stroke-width="2" stroke-linecap="round"/><line x1="2" y1="12" x2="5" y2="12" stroke="#FFD700" stroke-width="2" stroke-linecap="round"/><line x1="19" y1="12" x2="22" y2="12" stroke="#FFD700" stroke-width="2" stroke-linecap="round"/><line x1="4.93" y1="4.93" x2="7.05" y2="7.05" stroke="#FFD700" stroke-width="2" stroke-linecap="round"/><line x1="16.95" y1="16.95" x2="19.07" y2="19.07" stroke="#FFD700" stroke-width="2" stroke-linecap="round"/><line x1="19.07" y1="4.93" x2="16.95" y2="7.05" stroke="#FFD700" stroke-width="2" stroke-linecap="round"/><line x1="7.05" y1="16.95" x2="4.93" y2="19.07" stroke="#FFD700" stroke-width="2" stroke-linecap="round"/></svg></div>
     </div>
     <button id="nav-hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
   </nav>
@@ -950,7 +954,7 @@
     (function(){var bar=document.getElementById('loaderBar'),pct=document.getElementById('loaderPct'),loader=document.getElementById('loader'),p=0;var iv=setInterval(function(){p+=Math.random()*16+5;if(p>=100){p=100;clearInterval(iv);}bar.style.width=p+'%';pct.textContent=Math.round(p)+'%';if(p===100){setTimeout(function(){prepHeroInitial();loader.style.opacity='0';setTimeout(function(){loader.style.display='none';startHeroAnim();},700);},350);}},90);})();
     /* THEME */
     var htmlEl=document.documentElement,toggleBtn=document.getElementById('theme-toggle'),thumb=toggleBtn.querySelector('.toggle-thumb');
-    function setTheme(m){htmlEl.setAttribute('data-theme',m);thumb.textContent=m==='dark'?'☀':'☾';try{localStorage.setItem('theme',m);}catch(e){}}
+    function setTheme(m){htmlEl.setAttribute('data-theme',m);try{localStorage.setItem('theme',m);}catch(e){}}
     try{var saved=localStorage.getItem('theme');setTheme(saved||'dark');}catch(e){setTheme('dark');}
     toggleBtn.addEventListener('click',function(){setTheme(htmlEl.getAttribute('data-theme')==='dark'?'light':'dark');});
     /* CURSOR */
